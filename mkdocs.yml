@@ -11,6 +11,7 @@ nav:
   - Guía de ejecución: guia_ejecucion.md
   - Trazabilidad U3: trazabilidad_u3.md
   - Gobierno y hallazgos U3: gobierno_hallazgos_u3.md
+  - Informe final U3: informe_final_u3.md
 markdown_extensions:
   - toc:
       permalink: true
