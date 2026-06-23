@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Equipo Rico BI" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Informe final U3 - Rico BI - Producto BI End-to-End</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Informe final U3";
+        var mkdocs_page_input_path = "informe_final_u3.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Rico BI - Producto BI End-to-End
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Inicio</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../guia_ejecucion/">Guía de ejecución</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../trazabilidad_u3/">Trazabilidad U3</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../gobierno_hallazgos_u3/">Gobierno y hallazgos U3</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Informe final U3</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-datos-generales">1. Datos generales</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-resumen-ejecutivo">2. Resumen ejecutivo</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-arquitectura-bi-implementada">3. Arquitectura BI implementada</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-modelo-analitico">4. Modelo analítico</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-kpis-principales">5. KPIs principales</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-comparativos-u3">6. Comparativos U3</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-validacion-sql">7. Validación SQL</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-trazabilidad">8. Trazabilidad</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#9-gobierno-minimo-de-datos">9. Gobierno mínimo de datos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#10-hallazgos-principales">10. Hallazgos principales</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#11-decision-recomendada">11. Decisión recomendada</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#12-evidencias-entregables">12. Evidencias entregables</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#13-conclusion">13. Conclusión</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Rico BI - Producto BI End-to-End</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Informe final U3</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="informe-final-u3-producto-bi-end-to-end">Informe final U3 - Producto BI end-to-end<a class="headerlink" href="#informe-final-u3-producto-bi-end-to-end" title="Permanent link">&para;</a></h1>
+<h2 id="1-datos-generales">1. Datos generales<a class="headerlink" href="#1-datos-generales" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proyecto</td>
+<td>Rico BI</td>
+</tr>
+<tr>
+<td>Empresa analizada</td>
+<td>Corporación Rico S.A.C.</td>
+</tr>
+<tr>
+<td>Proceso de negocio</td>
+<td>Ventas, productos, clientes, vendedores, almacén y cobranza</td>
+</tr>
+<tr>
+<td>Fuente transaccional</td>
+<td>MySQL OLTP <code>rico_oltp</code></td>
+</tr>
+<tr>
+<td>Data Warehouse</td>
+<td>PostgreSQL <code>rico_dw</code></td>
+</tr>
+<tr>
+<td>Herramientas</td>
+<td>MySQL, Airbyte, PostgreSQL, dbt, Power BI, Docker, MkDocs</td>
+</tr>
+<tr>
+<td>Repositorio</td>
+<td>https://github.com/EliasDemo/rico-bi</td>
+</tr>
+<tr>
+<td>Documentación</td>
+<td>https://EliasDemo.github.io/rico-bi/</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-resumen-ejecutivo">2. Resumen ejecutivo<a class="headerlink" href="#2-resumen-ejecutivo" title="Permanent link">&para;</a></h2>
+<p>Rico BI implementa una solución Business Intelligence end-to-end para analizar ventas, rentabilidad y cobranza de Corporación Rico S.A.C. El proyecto integra una fuente transaccional MySQL, un proceso de ingesta con Airbyte, un Data Warehouse en PostgreSQL, transformaciones con dbt, un modelo semántico en Power BI y dashboards interactivos para la toma de decisiones.</p>
+<p>La solución permite medir ventas facturadas, ventas netas sin IGV, margen bruto, porcentaje de margen, monto pagado, saldo pendiente, porcentaje cobrado, DSO promedio, variaciones YoY y MoM. Los indicadores fueron validados mediante SQL y contrastados con Power BI.</p>
+<h2 id="3-arquitectura-bi-implementada">3. Arquitectura BI implementada<a class="headerlink" href="#3-arquitectura-bi-implementada" title="Permanent link">&para;</a></h2>
+<p>El flujo implementado es:</p>
+<p>MySQL OLTP → Airbyte → PostgreSQL RAW → dbt STAGING → dbt MARTS → Power BI</p>
+<p>La arquitectura separa la base transaccional de la base analítica. MySQL funciona como sistema origen; Airbyte replica los datos hacia PostgreSQL en la capa raw; dbt transforma los datos hacia staging y marts; finalmente, Power BI consume el modelo dimensional para construir dashboards ejecutivos.</p>
+<h2 id="4-modelo-analitico">4. Modelo analítico<a class="headerlink" href="#4-modelo-analitico" title="Permanent link">&para;</a></h2>
+<p>El DataMart se construyó bajo un modelo dimensional tipo estrella, compuesto por dimensiones y tablas de hechos.</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Tabla</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dimensión</td>
+<td>dim_tiempo</td>
+<td>Calendario analítico</td>
+</tr>
+<tr>
+<td>Dimensión</td>
+<td>dim_cliente</td>
+<td>Clientes, tipo y ubicación</td>
+</tr>
+<tr>
+<td>Dimensión</td>
+<td>dim_producto</td>
+<td>Productos, categorías, precios y stock</td>
+</tr>
+<tr>
+<td>Dimensión</td>
+<td>dim_vendedor</td>
+<td>Vendedores y zonas</td>
+</tr>
+<tr>
+<td>Dimensión</td>
+<td>dim_almacen</td>
+<td>Almacenes y ubicación</td>
+</tr>
+<tr>
+<td>Hecho</td>
+<td>fact_ventas</td>
+<td>Ventas a nivel de detalle</td>
+</tr>
+<tr>
+<td>Hecho</td>
+<td>fact_pagos</td>
+<td>Pagos, cobranza y mora</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-kpis-principales">5. KPIs principales<a class="headerlink" href="#5-kpis-principales" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>KPI</th>
+<th style="text-align: right;">Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ventas facturadas</td>
+<td style="text-align: right;">S/ 605.83 mill.</td>
+</tr>
+<tr>
+<td>Ventas netas sin IGV</td>
+<td style="text-align: right;">S/ 513.42 mill.</td>
+</tr>
+<tr>
+<td>Margen bruto</td>
+<td style="text-align: right;">S/ 154.18 mill.</td>
+</tr>
+<tr>
+<td>% margen bruto</td>
+<td style="text-align: right;">30.03 %</td>
+</tr>
+<tr>
+<td>Monto pagado</td>
+<td style="text-align: right;">S/ 583.67 mill.</td>
+</tr>
+<tr>
+<td>Saldo pendiente</td>
+<td style="text-align: right;">S/ 22.16 mill.</td>
+</tr>
+<tr>
+<td>% cobrado</td>
+<td style="text-align: right;">96.34 %</td>
+</tr>
+<tr>
+<td>DSO promedio</td>
+<td style="text-align: right;">12.27 días</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-comparativos-u3">6. Comparativos U3<a class="headerlink" href="#6-comparativos-u3" title="Permanent link">&para;</a></h2>
+<p>Para cumplir el análisis comparativo de la Unidad 3, se agregó una página en Power BI denominada <code>Comparativo U3</code>. Esta página permite comparar el periodo actual contra el mismo periodo del año anterior y contra el mes anterior.</p>
+<p>Para enero de 2025, los resultados fueron:</p>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th style="text-align: right;">Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ventas actuales</td>
+<td style="text-align: right;">S/ 17,189,473.94</td>
+</tr>
+<tr>
+<td>Ventas año anterior</td>
+<td style="text-align: right;">S/ 17,278,131.27</td>
+</tr>
+<tr>
+<td>Variación YoY</td>
+<td style="text-align: right;">-S/ 88,657.33</td>
+</tr>
+<tr>
+<td>% YoY</td>
+<td style="text-align: right;">-0.51 %</td>
+</tr>
+<tr>
+<td>Ventas mes anterior</td>
+<td style="text-align: right;">S/ 30,390,295.52</td>
+</tr>
+<tr>
+<td>Variación MoM</td>
+<td style="text-align: right;">-S/ 13,200,821.58</td>
+</tr>
+<tr>
+<td>% MoM</td>
+<td style="text-align: right;">-43.44 %</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-validacion-sql">7. Validación SQL<a class="headerlink" href="#7-validacion-sql" title="Permanent link">&para;</a></h2>
+<p>La validación de comparativos se realizó mediante el archivo:</p>
+<p><code>dw-dbt/rico_bi/rico_bi/analyses/validacion_comparativos_u3.sql</code></p>
+<p>Los resultados SQL coinciden con las tarjetas y matriz del dashboard Power BI. Esto demuestra consistencia entre el DataMart y el modelo semántico.</p>
+<h2 id="8-trazabilidad">8. Trazabilidad<a class="headerlink" href="#8-trazabilidad" title="Permanent link">&para;</a></h2>
+<p>La trazabilidad se documentó en MkDocs mediante la página <code>Trazabilidad U3</code>. Esta matriz relaciona cada KPI con su fuente OLTP, capa raw, modelo dbt, medida Power BI, página del dashboard y consulta de validación.</p>
+<h2 id="9-gobierno-minimo-de-datos">9. Gobierno mínimo de datos<a class="headerlink" href="#9-gobierno-minimo-de-datos" title="Permanent link">&para;</a></h2>
+<p>Se estableció un gobierno mínimo de datos para definir fuente oficial, regla de cálculo, frecuencia, responsable y criterio de calidad de cada KPI. Esto permite controlar el uso de los indicadores y asegurar que las decisiones se basen en métricas confiables.</p>
+<h2 id="10-hallazgos-principales">10. Hallazgos principales<a class="headerlink" href="#10-hallazgos-principales" title="Permanent link">&para;</a></h2>
+<p>En enero de 2025, las ventas facturadas fueron S/ 17,189,473.94. Frente al mismo mes del año anterior, se observa una ligera disminución de -0.51 %. Sin embargo, frente al mes anterior, la caída fue de -43.44 %, lo que representa una señal de alerta comercial.</p>
+<p>Por categoría, POLLO concentra la mayor facturación, pero presenta una reducción interanual. CERDO muestra crecimiento positivo, mientras EMBUTIDOS presenta caída relevante. Esto evidencia que el desempeño no es homogéneo entre categorías.</p>
+<h2 id="11-decision-recomendada">11. Decisión recomendada<a class="headerlink" href="#11-decision-recomendada" title="Permanent link">&para;</a></h2>
+<p>Se recomienda aplicar una estrategia comercial diferenciada por categoría. Para POLLO, se debe proteger el volumen de ventas mediante seguimiento a clientes principales y vendedores clave. Para EMBUTIDOS, se recomienda revisar precios, promociones, rotación y abastecimiento. Para CERDO, se recomienda reforzar la estrategia comercial porque muestra crecimiento positivo.</p>
+<p>Asimismo, se recomienda que gerencia comercial revise mensualmente el dashboard <code>Comparativo U3</code> para monitorear ventas, variaciones YoY, variaciones MoM, margen y cobranza.</p>
+<h2 id="12-evidencias-entregables">12. Evidencias entregables<a class="headerlink" href="#12-evidencias-entregables" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Evidencia</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Repositorio GitHub</td>
+<td>Completado</td>
+</tr>
+<tr>
+<td>README principal</td>
+<td>Completado</td>
+</tr>
+<tr>
+<td>MkDocs publicado</td>
+<td>Completado</td>
+</tr>
+<tr>
+<td>OLTP MySQL</td>
+<td>Completado</td>
+</tr>
+<tr>
+<td>Airbyte</td>
+<td>Completado</td>
+</tr>
+<tr>
+<td>PostgreSQL DW</td>
+<td>Completado</td>
+</tr>
+<tr>
+<td>dbt staging y marts</td>
+<td>Completado</td>
+</tr>
+<tr>
+<td>Pruebas dbt</td>
+<td>Completado</td>
+</tr>
+<tr>
+<td>Power BI base</td>
+<td>Completado</td>
+</tr>
+<tr>
+<td>Power BI U3</td>
+<td>Completado</td>
+</tr>
+<tr>
+<td>Validación SQL comparativos</td>
+<td>Completado</td>
+</tr>
+<tr>
+<td>Trazabilidad U3</td>
+<td>Completado</td>
+</tr>
+<tr>
+<td>Gobierno y hallazgos</td>
+<td>Completado</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-conclusion">13. Conclusión<a class="headerlink" href="#13-conclusion" title="Permanent link">&para;</a></h2>
+<p>El proyecto Rico BI cumple con el enfoque BI end-to-end solicitado para la Unidad 3. La solución integra datos desde el origen transaccional hasta el dashboard, mantiene trazabilidad, valida los KPIs con SQL y permite generar hallazgos de negocio para apoyar decisiones comerciales, financieras y de cobranza.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../gobierno_hallazgos_u3/" class="btn btn-neutral float-left" title="Gobierno y hallazgos U3"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../gobierno_hallazgos_u3/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
