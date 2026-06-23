@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Equipo Rico BI" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Trazabilidad fuente-modelo-KPI-dashboard - Rico BI - Producto BI End-to-End</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Trazabilidad fuente-modelo-KPI-dashboard";
+        var mkdocs_page_input_path = "trazabilidad_u3.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Rico BI - Producto BI End-to-End
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Inicio</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../guia_ejecucion/">Guía de ejecución</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Rico BI - Producto BI End-to-End</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Trazabilidad fuente-modelo-KPI-dashboard</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="trazabilidad-fuente-modelo-kpi-dashboard">Trazabilidad fuente-modelo-KPI-dashboard<a class="headerlink" href="#trazabilidad-fuente-modelo-kpi-dashboard" title="Permanent link">&para;</a></h1>
+<p>Esta sección documenta la trazabilidad de los principales indicadores del producto BI U3, desde la fuente transaccional hasta el dashboard de Power BI.</p>
+<table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>Fuente OLTP</th>
+<th>Capa RAW</th>
+<th>Modelo dbt / Marts</th>
+<th>Medida Power BI</th>
+<th>Página dashboard</th>
+<th>Validación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ventas Facturadas</td>
+<td>ventas, detalle_ventas</td>
+<td>raw.ventas, raw.detalle_ventas</td>
+<td>marts.fact_ventas</td>
+<td>Ventas Facturadas</td>
+<td>Resumen Ejecutivo / Comparativo U3</td>
+<td>SQL vs Power BI</td>
+</tr>
+<tr>
+<td>Ventas Año Anterior</td>
+<td>ventas, detalle_ventas</td>
+<td>raw.ventas, raw.detalle_ventas</td>
+<td>marts.fact_ventas + marts.dim_tiempo</td>
+<td>Ventas Año Anterior</td>
+<td>Comparativo U3</td>
+<td>validacion_comparativos_u3.sql</td>
+</tr>
+<tr>
+<td>Variación Ventas YoY</td>
+<td>ventas, detalle_ventas</td>
+<td>raw.ventas, raw.detalle_ventas</td>
+<td>marts.fact_ventas + marts.dim_tiempo</td>
+<td>Variación Ventas YoY</td>
+<td>Comparativo U3</td>
+<td>validacion_comparativos_u3.sql</td>
+</tr>
+<tr>
+<td>% Crecimiento YoY</td>
+<td>ventas, detalle_ventas</td>
+<td>raw.ventas, raw.detalle_ventas</td>
+<td>marts.fact_ventas + marts.dim_tiempo</td>
+<td>% Crecimiento YoY</td>
+<td>Comparativo U3</td>
+<td>validacion_comparativos_u3.sql</td>
+</tr>
+<tr>
+<td>Ventas Mes Anterior</td>
+<td>ventas, detalle_ventas</td>
+<td>raw.ventas, raw.detalle_ventas</td>
+<td>marts.fact_ventas + marts.dim_tiempo</td>
+<td>Ventas Mes Anterior</td>
+<td>Comparativo U3</td>
+<td>validacion_comparativos_u3.sql</td>
+</tr>
+<tr>
+<td>Variación Ventas MoM</td>
+<td>ventas, detalle_ventas</td>
+<td>raw.ventas, raw.detalle_ventas</td>
+<td>marts.fact_ventas + marts.dim_tiempo</td>
+<td>Variación Ventas MoM</td>
+<td>Comparativo U3</td>
+<td>validacion_comparativos_u3.sql</td>
+</tr>
+<tr>
+<td>% Crecimiento MoM</td>
+<td>ventas, detalle_ventas</td>
+<td>raw.ventas, raw.detalle_ventas</td>
+<td>marts.fact_ventas + marts.dim_tiempo</td>
+<td>% Crecimiento MoM</td>
+<td>Comparativo U3</td>
+<td>validacion_comparativos_u3.sql</td>
+</tr>
+<tr>
+<td>Ventas Netas sin IGV</td>
+<td>ventas, detalle_ventas</td>
+<td>raw.ventas, raw.detalle_ventas</td>
+<td>marts.fact_ventas</td>
+<td>Ventas Netas sin IGV</td>
+<td>Resumen Ejecutivo</td>
+<td>validacion_marts.sql</td>
+</tr>
+<tr>
+<td>Margen Bruto</td>
+<td>ventas, detalle_ventas, productos</td>
+<td>raw.ventas, raw.detalle_ventas, raw.productos</td>
+<td>marts.fact_ventas</td>
+<td>Margen Bruto</td>
+<td>Resumen Ejecutivo / Productos y Rentabilidad</td>
+<td>validacion_marts.sql</td>
+</tr>
+<tr>
+<td>% Margen Bruto</td>
+<td>ventas, detalle_ventas, productos</td>
+<td>raw.ventas, raw.detalle_ventas, raw.productos</td>
+<td>marts.fact_ventas</td>
+<td>% Margen Bruto</td>
+<td>Resumen Ejecutivo / Productos y Rentabilidad</td>
+<td>SQL vs Power BI</td>
+</tr>
+<tr>
+<td>Monto Pagado</td>
+<td>pagos</td>
+<td>raw.pagos</td>
+<td>marts.fact_pagos</td>
+<td>Monto Pagado</td>
+<td>Cobranza y Tiempo</td>
+<td>validacion_marts.sql</td>
+</tr>
+<tr>
+<td>Saldo Pendiente</td>
+<td>pagos</td>
+<td>raw.pagos</td>
+<td>marts.fact_pagos</td>
+<td>Saldo Pendiente</td>
+<td>Cobranza y Tiempo</td>
+<td>validacion_marts.sql</td>
+</tr>
+<tr>
+<td>% Cobrado</td>
+<td>pagos</td>
+<td>raw.pagos</td>
+<td>marts.fact_pagos</td>
+<td>% Cobrado</td>
+<td>Cobranza y Tiempo</td>
+<td>SQL vs Power BI</td>
+</tr>
+<tr>
+<td>DSO Promedio</td>
+<td>pagos</td>
+<td>raw.pagos</td>
+<td>marts.fact_pagos</td>
+<td>DSO Promedio</td>
+<td>Cobranza y Tiempo</td>
+<td>SQL vs Power BI</td>
+</tr>
+</tbody>
+</table>
+<h2 id="evidencia-de-validacion">Evidencia de validación<a class="headerlink" href="#evidencia-de-validacion" title="Permanent link">&para;</a></h2>
+<p>La validación de comparativos U3 se realizó mediante el archivo:</p>
+<p><code>dw-dbt/rico_bi/rico_bi/analyses/validacion_comparativos_u3.sql</code></p>
+<p>Para el periodo enero 2025, los resultados SQL coinciden con Power BI:</p>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th style="text-align: right;">Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ventas actuales</td>
+<td style="text-align: right;">S/ 17,189,473.94</td>
+</tr>
+<tr>
+<td>Ventas año anterior</td>
+<td style="text-align: right;">S/ 17,278,131.27</td>
+</tr>
+<tr>
+<td>Variación YoY</td>
+<td style="text-align: right;">-S/ 88,657.33</td>
+</tr>
+<tr>
+<td>% YoY</td>
+<td style="text-align: right;">-0.51 %</td>
+</tr>
+<tr>
+<td>Ventas mes anterior</td>
+<td style="text-align: right;">S/ 30,390,295.52</td>
+</tr>
+<tr>
+<td>Variación MoM</td>
+<td style="text-align: right;">-S/ 13,200,821.58</td>
+</tr>
+<tr>
+<td>% MoM</td>
+<td style="text-align: right;">-43.44 %</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
