@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Equipo Rico BI" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Gobierno y hallazgos U3 - Rico BI - Producto BI End-to-End</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Gobierno y hallazgos U3";
+        var mkdocs_page_input_path = "gobierno_hallazgos_u3.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Rico BI - Producto BI End-to-End
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Inicio</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../guia_ejecucion/">Guía de ejecución</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../trazabilidad_u3/">Trazabilidad U3</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Gobierno y hallazgos U3</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-gobierno-minimo-de-datos">1. Gobierno mínimo de datos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-hallazgos-principales">2. Hallazgos principales</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-interpretacion-de-negocio">3. Interpretación de negocio</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-decision-recomendada">4. Decisión recomendada</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Rico BI - Producto BI End-to-End</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Gobierno y hallazgos U3</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="gobierno-minimo-de-datos-hallazgos-y-decision-recomendada">Gobierno mínimo de datos, hallazgos y decisión recomendada<a class="headerlink" href="#gobierno-minimo-de-datos-hallazgos-y-decision-recomendada" title="Permanent link">&para;</a></h1>
+<h2 id="1-gobierno-minimo-de-datos">1. Gobierno mínimo de datos<a class="headerlink" href="#1-gobierno-minimo-de-datos" title="Permanent link">&para;</a></h2>
+<p>El producto BI Rico BI establece un gobierno mínimo de datos para asegurar que los indicadores utilizados en el dashboard tengan una fuente definida, una regla de cálculo conocida, una frecuencia de actualización y un responsable funcional.</p>
+<table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>Fuente oficial</th>
+<th>Capa analítica</th>
+<th>Regla de cálculo</th>
+<th>Frecuencia</th>
+<th>Responsable</th>
+<th>Criterio de calidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ventas Facturadas</td>
+<td>ventas, detalle_ventas</td>
+<td>marts.fact_ventas</td>
+<td>SUM(venta_facturada_con_igv)</td>
+<td>Diaria</td>
+<td>Gerencia comercial</td>
+<td>Diferencia SQL vs Power BI = 0.00</td>
+</tr>
+<tr>
+<td>Ventas Netas sin IGV</td>
+<td>ventas, detalle_ventas</td>
+<td>marts.fact_ventas</td>
+<td>SUM(venta_neta_sin_igv)</td>
+<td>Diaria</td>
+<td>Gerencia comercial</td>
+<td>Sin valores nulos críticos</td>
+</tr>
+<tr>
+<td>Margen Bruto</td>
+<td>ventas, detalle_ventas, productos</td>
+<td>marts.fact_ventas</td>
+<td>SUM(margen_bruto)</td>
+<td>Diaria</td>
+<td>Gerencia comercial</td>
+<td>Cálculo sobre venta neta sin IGV</td>
+</tr>
+<tr>
+<td>% Margen Bruto</td>
+<td>fact_ventas</td>
+<td>marts.fact_ventas</td>
+<td>Margen Bruto / Ventas Netas sin IGV</td>
+<td>Diaria</td>
+<td>Gerencia comercial</td>
+<td>Coincidencia SQL vs Power BI</td>
+</tr>
+<tr>
+<td>Monto Pagado</td>
+<td>pagos</td>
+<td>marts.fact_pagos</td>
+<td>SUM(monto_pagado)</td>
+<td>Diaria</td>
+<td>Administración / cobranza</td>
+<td>Diferencia SQL vs Power BI = 0.00</td>
+</tr>
+<tr>
+<td>Saldo Pendiente</td>
+<td>pagos</td>
+<td>marts.fact_pagos</td>
+<td>SUM(saldo_pendiente)</td>
+<td>Diaria</td>
+<td>Administración / cobranza</td>
+<td>Sin montos negativos inconsistentes</td>
+</tr>
+<tr>
+<td>% Cobrado</td>
+<td>pagos</td>
+<td>marts.fact_pagos</td>
+<td>Monto Pagado / Monto Total</td>
+<td>Diaria</td>
+<td>Administración / cobranza</td>
+<td>Validación contra fact_pagos</td>
+</tr>
+<tr>
+<td>DSO Promedio</td>
+<td>pagos</td>
+<td>marts.fact_pagos</td>
+<td>AVERAGE(dias_cobro)</td>
+<td>Diaria</td>
+<td>Área de cobranza</td>
+<td>Fechas de emisión y pago válidas</td>
+</tr>
+<tr>
+<td>Ventas Año Anterior</td>
+<td>ventas, detalle_ventas, dim_tiempo</td>
+<td>marts.fact_ventas + marts.dim_tiempo</td>
+<td>Comparación con mismo periodo del año anterior</td>
+<td>Mensual</td>
+<td>Gerencia comercial</td>
+<td>Validado con SQL U3</td>
+</tr>
+<tr>
+<td>Ventas Mes Anterior</td>
+<td>ventas, detalle_ventas, dim_tiempo</td>
+<td>marts.fact_ventas + marts.dim_tiempo</td>
+<td>Comparación con mes anterior</td>
+<td>Mensual</td>
+<td>Gerencia comercial</td>
+<td>Validado con SQL U3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-hallazgos-principales">2. Hallazgos principales<a class="headerlink" href="#2-hallazgos-principales" title="Permanent link">&para;</a></h2>
+<p>La solución BI permitió identificar que, para enero de 2025, las ventas facturadas fueron de S/ 17,189,473.94, mientras que en el mismo mes del año anterior fueron S/ 17,278,131.27. Esto representa que en el mismo mes del año anterior fueron S/ 17,278,131.27. Esto representa una variación YoY de -S/ 88,657.33 y un crecimiento de -0.51 %, lo que indica una ligera disminución interanual.</p>
+<p>En comparación con el mes anterior, enero de 2025 presentó ventas por S/ 17,189,473.94 frente a S/ 30,390,295.52 del periodo previo. La variación MoM fue de -S/ 13,200,821.58, equivalente a -43.44 %. Este resultado evidencia una caída mensual fuerte que debe ser revisada por gerencia comercial.</p>
+<p>Por categoría, la línea POLLO concentra la mayor parte de la facturación, con S/ 14,499,159.44 en enero de 2025. Sin embargo, presenta una reducción YoY de -S/ 264,110.41. En contraste, la categoría CERDO muestra crecimiento interanual positivo de S/ 415,445.93, equivalente a 33.04 %.</p>
+<p>La categoría EMBUTIDOS registra una caída YoY de -S/ 243,498.47, equivalente a -19.78 %. Este comportamiento sugiere revisar rotación, precios, promociones o abastecimiento de dicha categoría.</p>
+<h2 id="3-interpretacion-de-negocio">3. Interpretación de negocio<a class="headerlink" href="#3-interpretacion-de-negocio" title="Permanent link">&para;</a></h2>
+<p>El dashboard evidencia que el negocio mantiene un volumen importante de facturación, pero presenta señales de alerta en la evolución mensual. La caída MoM de -43.44 % indica que enero de 2025 tuvo un desempeño menor frente al mes anterior, por lo que se recomienda revisar si la disminución responde a estacionalidad, menor demanda, reducción de pedidos, quiebre de stock o menor desempeño comercial.</p>
+<p>El análisis por categoría muestra que no todas las líneas se comportan igual. CERDO tiene crecimiento positivo, mientras POLLO y EMBUTIDOS requieren seguimiento. Por ello, el análisis no debe limitarse al total general, sino que debe evaluarse por categoría, vendedor y periodo.</p>
+<h2 id="4-decision-recomendada">4. Decisión recomendada<a class="headerlink" href="#4-decision-recomendada" title="Permanent link">&para;</a></h2>
+<p>Se recomienda priorizar una estrategia comercial diferenciada por categoría. Para POLLO, se debe proteger el volumen de ventas mediante seguimiento a clientes principales y vendedores con mayor participación. Para EMBUTIDOS, se recomienda revisar precios, rotación y promociones, debido a su caída interanual. Para CERDO, se recomienda reforzar la estrategia comercial porque muestra crecimiento positivo y puede compensar parcialmente la caída de otras categorías.</p>
+<p>Asimismo, se recomienda que gerencia comercial revise mensualmente el dashboard Comparativo U3, especialmente las medidas de Ventas Facturadas, Ventas Año Anterior, Variación YoY, Ventas Mes Anterior y Variación MoM. Esta revisión permitirá tomar decisiones oportunas sobre ventas, campañas comerciales, gestión de vendedores y abastecimiento.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../trazabilidad_u3/" class="btn btn-neutral float-left" title="Trazabilidad U3"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../trazabilidad_u3/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
