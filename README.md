@@ -5,6 +5,7 @@
 
 **Ventas · Rentabilidad · Clientes · Vendedores · Cobranza**
 
+<br>
 
 ## 🔗 Enlaces del producto
 
@@ -12,10 +13,13 @@
 |---|---|
 | Repositorio GitHub | https://github.com/EliasDemo/rico-bi |
 | Documentación MkDocs | https://EliasDemo.github.io/rico-bi/ |
-| Dashboard Power BI | `powerbi/rico_pollo_actualizado.pbix` |
+| Dashboard Power BI U3 | `powerbi/rico_pollo_actualizado_U3.pbix` |
+| Dashboard Power BI base | `powerbi/rico_pollo_actualizado.pbix` |
+| Validación SQL U3 | `dw-dbt/rico_bi/rico_bi/analyses/validacion_comparativos_u3.sql` |
+
 <br>
 
-![Estado](https://img.shields.io/badge/Estado-U3%20en%20desarrollo-ffb000?style=for-the-badge)
+![Estado](https://img.shields.io/badge/Estado-U3%20avanzado-2ea44f?style=for-the-badge)
 ![BI](https://img.shields.io/badge/Business%20Intelligence-End--to--End-1f77b4?style=for-the-badge)
 ![Power BI](https://img.shields.io/badge/Power%20BI-Dashboard-f2c811?style=for-the-badge&logo=powerbi&logoColor=black)
 ![dbt](https://img.shields.io/badge/dbt-Transformaciones-ff694b?style=for-the-badge&logo=dbt&logoColor=white)
@@ -41,6 +45,7 @@
 | **Data Warehouse / DataMart** | PostgreSQL `rico_dw` con esquemas `raw`, `staging` y `marts` |
 | **Transformación** | dbt |
 | **Visualización** | Power BI |
+| **Documentación** | MkDocs publicado en GitHub Pages |
 | **Entregable** | Unidad 3: producto BI end-to-end |
 
 ---
@@ -59,9 +64,10 @@
 - [10. Dashboard Power BI](#10-dashboard-power-bi)
 - [11. Ejecución rápida](#11-ejecución-rápida)
 - [12. Validación y calidad de datos](#12-validación-y-calidad-de-datos)
-- [13. Evidencias U3](#13-evidencias-u3)
-- [14. Integrantes](#14-integrantes)
-- [15. Próximos pasos](#15-próximos-pasos)
+- [13. Comparativos U3 validados](#13-comparativos-u3-validados)
+- [14. Evidencias U3](#14-evidencias-u3)
+- [15. Integrantes](#15-integrantes)
+- [16. Próximos pasos](#16-próximos-pasos)
 
 ---
 
@@ -79,7 +85,8 @@ La solución permite analizar:
 - clientes principales;
 - saldo pendiente de cobranza;
 - eficiencia de cobro;
-- evolución temporal de ventas.
+- evolución temporal de ventas;
+- comparativos YoY y MoM para el entregable U3.
 
 El flujo implementado es:
 
@@ -105,6 +112,7 @@ Corporación Rico S.A.C. necesita una vista analítica integrada para responder 
 | ¿Cuál es la cartera pendiente? | Gestionar cobranza |
 | ¿Cómo evolucionan las ventas por periodo? | Detectar tendencias y estacionalidad |
 | ¿Qué categorías tienen mayor participación? | Ajustar estrategia comercial |
+| ¿Cómo varía la venta frente al año anterior y al mes anterior? | Evaluar crecimiento, caída o estacionalidad |
 
 ---
 
@@ -152,6 +160,7 @@ flowchart LR
 | Transformación | dbt + dbt-postgres | Staging, marts y pruebas |
 | Modelo semántico | Power BI Desktop | Relaciones y medidas DAX |
 | Visualización | Power BI | Dashboard ejecutivo |
+| Documentación | MkDocs + GitHub Pages | Documentación técnica del producto |
 | Validación | SQL + dbt test + Power BI | Control de calidad y consistencia |
 
 ---
@@ -162,6 +171,7 @@ flowchart LR
 rico-bi
 ├── README.md
 ├── .gitignore
+├── mkdocs.yml
 ├── oltp-mysql
 │   ├── docker-compose.yml
 │   ├── 01_rico_oltp_completo.sql
@@ -190,22 +200,17 @@ rico-bi
 │           │   ├── staging
 │           │   └── marts
 │           ├── analyses
-│           │   └── validacion_marts.sql
+│           │   ├── validacion_marts.sql
+│           │   └── validacion_comparativos_u3.sql
 │           └── macros
 ├── powerbi
-│   └── rico_pollo_actualizado.pbix
+│   ├── rico_pollo_actualizado.pbix
+│   └── rico_pollo_actualizado_U3.pbix
 └── docs
     ├── index.md
-    ├── oltp.md
-    ├── airbyte.md
-    ├── dbt.md
-    ├── datamart.md
-    ├── powerbi.md
-    ├── validacion.md
-    └── sustentacion.md
+    ├── guia_ejecucion.md
+    └── trazabilidad_u3.md
 ```
-
-> **Nota:** la carpeta `docs/` corresponde a la documentación MkDocs del producto U3. Si todavía no existe, debe crearse en el siguiente paso.
 
 ---
 
@@ -260,6 +265,12 @@ erDiagram
 | DSO promedio | `AVERAGE(dias_cobro)` | Días promedio de cobro |
 | Ticket promedio | `Ventas Facturadas / Operaciones` | Valor promedio de operación |
 | Ventas por vendedor | `SUM(ventas) por vendedor` | Evaluación comercial |
+| Ventas año anterior | Ventas del mismo periodo del año anterior | Comparativo YoY |
+| Variación Ventas YoY | Ventas actuales - ventas año anterior | Variación absoluta anual |
+| % Crecimiento YoY | Variación YoY / ventas año anterior | Variación porcentual anual |
+| Ventas mes anterior | Ventas del periodo mensual anterior | Comparativo MoM |
+| Variación Ventas MoM | Ventas actuales - ventas mes anterior | Variación absoluta mensual |
+| % Crecimiento MoM | Variación MoM / ventas mes anterior | Variación porcentual mensual |
 
 ---
 
@@ -296,7 +307,13 @@ erDiagram
 
 ## 10. Dashboard Power BI
 
-Archivo principal:
+Archivo principal U3:
+
+```text
+powerbi/rico_pollo_actualizado_U3.pbix
+```
+
+Archivo base conservado:
 
 ```text
 powerbi/rico_pollo_actualizado.pbix
@@ -310,14 +327,17 @@ powerbi/rico_pollo_actualizado.pbix
 | **Productos y rentabilidad** | Análisis de productos, categorías, kilos vendidos y margen |
 | **Clientes y vendedores** | Desempeño por cliente, vendedor, zona y tipo de cliente |
 | **Cobranza y evolución temporal** | Pagos, saldo pendiente, DSO y tendencia temporal |
+| **Comparativo U3** | Comparativo actual vs año anterior y actual vs mes anterior |
 
-### Requerimientos U3 pendientes o por reforzar
+### Componentes U3 incorporados
 
 - Comparativo del periodo actual vs mismo periodo del año anterior.
 - Comparativo del periodo actual vs periodo anterior.
-- Tabla KPI de variación por dimensión de negocio.
+- Variación absoluta YoY y MoM.
+- Variación porcentual YoY y MoM.
+- Tabla KPI de variación por categoría.
 - Validación SQL de los comparativos.
-- Interpretación de hallazgos y decisión recomendada.
+- Trazabilidad fuente-modelo-KPI-dashboard publicada en MkDocs.
 
 ---
 
@@ -394,6 +414,14 @@ dbt compile --select validacion_marts
 
 Ejecutar el SQL compilado contra PostgreSQL para comparar conteos, ventas, pagos y KPIs.
 
+### 11.6 Validar comparativos U3
+
+Desde la raíz del proyecto:
+
+```bash
+docker exec -i rico-dw-postgres psql -U postgres -d rico_dw < dw-dbt\rico_bi\rico_bi\analyses\validacion_comparativos_u3.sql
+```
+
 ---
 
 ## 12. Validación y calidad de datos
@@ -407,6 +435,7 @@ Ejecutar el SQL compilado contra PostgreSQL para comparar conteos, ventas, pagos
 | Integridad referencial | Hechos relacionados con dimensiones | PASS |
 | Consistencia de montos | Diferencia OLTP/RAW/MARTS igual a 0.00 | PASS |
 | Consistencia BI | Power BI coincide con SQL | PASS |
+| Comparativos U3 | SQL coincide con Power BI para YoY y MoM | PASS |
 
 ### Hallazgos corregidos
 
@@ -416,15 +445,61 @@ Ejecutar el SQL compilado contra PostgreSQL para comparar conteos, ventas, pagos
 | Pagos con múltiples fechas de análisis | Limitaba DSO y cartera vencida | Se agregaron claves y métricas de cobranza |
 | Relación innecesaria entre hechos en Power BI | Podía afectar filtros | Se mantuvo modelo estrella con filtros desde dimensiones |
 | Nombres largos en visuales | Dificultaba lectura | Se mejoraron títulos, filtros y visuales |
+| Comparativo MoM en contexto global | Podía mostrar 0.00 sin filtro mensual | Se validó con periodo específico enero 2025 |
 
 ---
 
-## 13. Evidencias U3
+## 13. Comparativos U3 validados
+
+El dashboard U3 incorpora una página llamada **Comparativo U3**, orientada a demostrar el análisis del periodo actual frente al mismo periodo del año anterior y frente al periodo mensual anterior.
+
+Periodo usado para la validación:
+
+```text
+Año = 2025
+Mes = Enero
+```
+
+### Resultado total validado por SQL
+
+| Métrica | Resultado |
+|---|---:|
+| Ventas actuales | S/ 17,189,473.94 |
+| Ventas año anterior | S/ 17,278,131.27 |
+| Variación YoY | -S/ 88,657.33 |
+| % YoY | -0.51 % |
+| Ventas mes anterior | S/ 30,390,295.52 |
+| Variación MoM | -S/ 13,200,821.58 |
+| % MoM | -43.44 % |
+
+### Resultado por categoría
+
+| Categoría | Ventas actuales | Ventas año anterior | Variación YoY | % YoY | Ventas mes anterior | Variación MoM | % MoM |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| CERDO | S/ 1,672,847.20 | S/ 1,257,401.27 | S/ 415,445.93 | 33.04 % | S/ 3,027,197.71 | -S/ 1,354,350.51 | -44.74 % |
+| EMBUTIDOS | S/ 987,791.36 | S/ 1,231,289.83 | -S/ 243,498.47 | -19.78 % | S/ 1,738,380.82 | -S/ 750,589.46 | -43.18 % |
+| HUEVO | S/ 29,675.94 | S/ 26,170.32 | S/ 3,505.62 | 13.40 % | S/ 39,770.54 | -S/ 10,094.60 | -25.38 % |
+| POLLO | S/ 14,499,159.44 | S/ 14,763,269.85 | -S/ 264,110.41 | -1.79 % | S/ 25,584,946.45 | -S/ 11,085,787.01 | -43.33 % |
+| **TOTAL** | **S/ 17,189,473.94** | **S/ 17,278,131.27** | **-S/ 88,657.33** | **-0.51 %** | **S/ 30,390,295.52** | **-S/ 13,200,821.58** | **-43.44 %** |
+
+Archivo de validación:
+
+```text
+dw-dbt/rico_bi/rico_bi/analyses/validacion_comparativos_u3.sql
+```
+
+---
+
+## 14. Evidencias U3
 
 | Evidencia | Estado |
 |---|---|
-| Repositorio organizado | 🟡 En preparación |
+| Repositorio GitHub | ✅ Publicado |
+| README principal | ✅ Completado |
 | `.gitignore` limpio | ✅ Completado |
+| MkDocs configurado | ✅ Completado |
+| GitHub Pages | ✅ Publicado |
+| Matriz de trazabilidad U3 | ✅ Completado |
 | OLTP MySQL | ✅ Completado |
 | DW manual MySQL | ✅ Completado |
 | PostgreSQL DW | ✅ Completado |
@@ -433,44 +508,54 @@ Ejecutar el SQL compilado contra PostgreSQL para comparar conteos, ventas, pagos
 | dbt marts | ✅ Completado |
 | Pruebas dbt | ✅ Completado |
 | Validación SQL vs marts | ✅ Completado |
-| Power BI `.pbix` | ✅ Completado |
-| MkDocs | 🟡 Pendiente |
-| Comparativos U3 | 🟡 Pendiente |
-| Validación SQL de comparativos | 🟡 Pendiente |
+| Power BI `.pbix` base | ✅ Completado |
+| Power BI `.pbix` U3 | ✅ Completado |
+| Comparativos U3 | ✅ Completado |
+| Validación SQL de comparativos | ✅ Completado |
+| Gobierno mínimo de datos | 🟡 Pendiente |
+| Hallazgos y decisión recomendada | 🟡 Pendiente |
+| Informe final U3 | 🟡 Pendiente |
 | PPT de sustentación | 🟡 Pendiente |
 
 ---
 
-## 14. Integrantes
+## 15. Integrantes
 
 | Integrante | Actividades realizadas |
 |---|---|
-| **Franck Albertson Coaquira Justo** | Ingesta con Airbyte, transformación con dbt, pruebas dbt, conexión con Power BI, métricas DAX y KPIs visuales |
+| **Franck Albertson Coaquira Justo** | Ingesta con Airbyte, transformación con dbt, pruebas dbt, conexión con Power BI, métricas DAX, KPIs visuales, comparativo U3 y validación SQL de comparativos |
 | **Abdul Quispe Condori** | Construcción de KPIs, validación OLTP, DW manual, apoyo en implementación con herramientas, Power BI y documentación |
 | **Julmer Quispe Apaza** | Apoyo en OLTP, implementación manual del DW, apoyo en pipeline con herramientas y documentación de evidencias |
 
 ---
 
-## 15. Próximos pasos
+## 16. Próximos pasos
 
 ```mermaid
 flowchart TD
-    A["1. Crear docs/ y mkdocs.yml"] --> B["2. Documentar OLTP, Airbyte, dbt, Power BI"]
-    B --> C["3. Completar comparativos U3"]
-    C --> D["4. Validar comparativos con SQL"]
-    D --> E["5. Armar informe final U3"]
-    E --> F["6. Preparar PPT de sustentación"]
-    F --> G["7. Publicar repositorio en GitHub"]
+    A["1. Completar gobierno mínimo de datos"] --> B["2. Redactar hallazgos y decisión recomendada"]
+    B --> C["3. Actualizar informe final U3"]
+    C --> D["4. Preparar PPT de sustentación"]
+    D --> E["5. Revisión final de evidencias"]
 ```
 
 ### Checklist inmediato
 
-- [ ] Crear carpeta `docs/`.
-- [ ] Crear archivo `mkdocs.yml`.
-- [ ] Pasar el manual largo a `docs/guia_ejecucion.md`.
-- [ ] Completar página Power BI de comparativos.
-- [ ] Agregar consultas SQL de validación para comparativos.
-- [ ] Actualizar este README cuando MkDocs y comparativos estén completados.
+- [x] Crear repositorio GitHub.
+- [x] Publicar README principal.
+- [x] Crear carpeta `docs/`.
+- [x] Crear archivo `mkdocs.yml`.
+- [x] Pasar el manual largo a `docs/guia_ejecucion.md`.
+- [x] Publicar MkDocs en GitHub Pages.
+- [x] Crear página `docs/trazabilidad_u3.md`.
+- [x] Incluir trazabilidad U3 en el menú de MkDocs.
+- [x] Completar página Power BI de comparativos.
+- [x] Agregar consulta SQL de validación para comparativos.
+- [x] Subir Power BI U3 al repositorio.
+- [ ] Completar gobierno mínimo de datos.
+- [ ] Redactar hallazgos y decisión recomendada.
+- [ ] Actualizar informe final U3.
+- [ ] Preparar PPT de sustentación.
 
 ---
 
