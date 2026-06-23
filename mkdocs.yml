@@ -7,55 +7,45 @@ repo_name: EliasDemo/rico-bi
 repo_url: https://github.com/EliasDemo/rico-bi
 
 theme:
-name: material
-language: es
-logo: assets/img/logo_upeu.png
-favicon: assets/img/logo_upeu.png
-features:
-- navigation.tabs
-- navigation.sections
-- navigation.expand
-- navigation.top
-- toc.integrate
-- search.highlight
-- search.suggest
-- content.code.copy
-palette:
-- scheme: default
-primary: blue
-accent: amber
+  name: material
+  language: es
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: blue
+      accent: amber
 
 nav:
-
-* Inicio: index.md
-* Ejecución:
-
-  * Guía de ejecución: guia_ejecucion.md
-* Producto U3:
-
-  * Trazabilidad U3: trazabilidad_u3.md
-  * Gobierno y hallazgos U3: gobierno_hallazgos_u3.md
-  * Informe final U3: informe_final_u3.md
-  * Evidencias U3: evidencias_u3.md
-* Repositorio:
-
-  * GitHub: https://github.com/EliasDemo/rico-bi
-  * Power BI U3: https://github.com/EliasDemo/rico-bi/tree/main/powerbi
+  - Inicio: index.md
+  - Guía de ejecución: guia_ejecucion.md
+  - Producto U3:
+      - Trazabilidad U3: trazabilidad_u3.md
+      - Gobierno y hallazgos U3: gobierno_hallazgos_u3.md
+      - Informe final U3: informe_final_u3.md
+      - Evidencias U3: evidencias_u3.md
+  - Repositorio:
+      - GitHub: https://github.com/EliasDemo/rico-bi
+      - Power BI: https://github.com/EliasDemo/rico-bi/tree/main/powerbi
 
 plugins:
-
-* search
+  - search
 
 markdown_extensions:
-
-* admonition
-* attr_list
-* md_in_html
-* tables
-* toc:
-  permalink: true
-* pymdownx.details
-* pymdownx.superfences
-* pymdownx.highlight:
-  anchor_linenums: true
-* pymdownx.inlinehilite
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
