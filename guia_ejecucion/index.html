@@ -1,585 +1,1695 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Equipo Rico BI" />
-      <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Guía de ejecución - Rico BI - Producto BI End-to-End</title>
-    <link rel="stylesheet" href="../css/theme.css" />
-    <link rel="stylesheet" href="../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
     
-      <script>
-        // Current page data
-        var mkdocs_page_name = "Gu\u00eda de ejecuci\u00f3n";
-        var mkdocs_page_input_path = "guia_ejecucion.md";
-        var mkdocs_page_url = null;
-      </script>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica del proyecto Rico BI para Corporación Rico S.A.C.">
+      
+      
+        <meta name="author" content="Equipo Rico BI">
+      
+      
+        <link rel="canonical" href="https://EliasDemo.github.io/rico-bi/guia_ejecucion/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../trazabilidad_u3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
-    <!--[if lt IE 9]>
-      <script src="../js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-      <script>hljs.highlightAll();</script> 
-</head>
+    
+      
+        <title>Guía de ejecución - Rico BI - Producto BI End-to-End</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
 
-<body class="wy-body-for-nav" role="document">
 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href=".." class="icon icon-home"> Rico BI - Producto BI End-to-End
-        </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="..">Inicio</a>
-                </li>
-              </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Guía de ejecución</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#1-objetivo">1. Objetivo</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#2-estructura-del-proyecto">2. Estructura del proyecto</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#3-requisitos">3. Requisitos</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#4-levantar-mysql-oltp">4. Levantar MySQL OLTP</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#5-validar-oltp">5. Validar OLTP</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#6-crear-y-validar-dw-manual-en-mysql">6. Crear y validar DW manual en MySQL</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#7-levantar-postgresql-dw">7. Levantar PostgreSQL DW</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#8-crear-tablas-raw">8. Crear tablas RAW</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#9-levantar-airbyte">9. Levantar Airbyte</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#10-configurar-airbyte">10. Configurar Airbyte</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#source-mysql">Source MySQL</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#destination-postgresql">Destination PostgreSQL</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#11-validar-raw-despues-de-airbyte">11. Validar RAW después de Airbyte</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#12-levantar-dbt-con-docker">12. Levantar dbt con Docker</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#13-ejecutar-dbt">13. Ejecutar dbt</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#14-validacion-final-de-marts">14. Validación final de marts</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#15-orden-recomendado-para-levantar-todo-despues">15. Orden recomendado para levantar todo después</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#16-comandos-utiles">16. Comandos útiles</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#17-estado-final">17. Estado final</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#18-explicacion-para-presentacion">18. Explicación para presentación</a>
-    </li>
-    </ul>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../trazabilidad_u3/">Trazabilidad U3</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../gobierno_hallazgos_u3/">Gobierno y hallazgos U3</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../informe_final_u3/">Informe final U3</a>
-                </li>
-              </ul>
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#proyecto-bi-corporacion-rico-sac" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href=".." title="Rico BI - Producto BI End-to-End" class="md-header__button md-logo" aria-label="Rico BI - Producto BI End-to-End" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rico BI - Producto BI End-to-End
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guía de ejecución
+            
+          </span>
+        </div>
       </div>
     </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="..">Rico BI - Producto BI End-to-End</a>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
         
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
       </nav>
-      <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Guía de ejecución</li>
-    <li class="wy-breadcrumbs-aside">
-    </li>
-  </ul>
-  <hr/>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/EliasDemo/rico-bi" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    EliasDemo/rico-bi
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Guía de ejecución
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../trazabilidad_u3/" class="md-tabs__link">
+          
+  
+  
+  Producto U3
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="https://github.com/EliasDemo/rico-bi" class="md-tabs__link">
+          
+  
+  
+  Repositorio
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
               
-                <h1 id="proyecto-bi-corporacion-rico-sac">Proyecto BI - Corporación Rico S.A.C.<a class="headerlink" href="#proyecto-bi-corporacion-rico-sac" title="Permanent link">&para;</a></h1>
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Rico BI - Producto BI End-to-End" class="md-nav__button md-logo" aria-label="Rico BI - Producto BI End-to-End" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Rico BI - Producto BI End-to-End
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/EliasDemo/rico-bi" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    EliasDemo/rico-bi
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guía de ejecución
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guía de ejecución
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-estructura-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Estructura del proyecto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Requisitos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-levantar-mysql-oltp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Levantar MySQL OLTP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-validar-oltp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Validar OLTP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-crear-y-validar-dw-manual-en-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Crear y validar DW manual en MySQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-levantar-postgresql-dw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Levantar PostgreSQL DW
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-crear-tablas-raw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Crear tablas RAW
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-levantar-airbyte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Levantar Airbyte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-configurar-airbyte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Configurar Airbyte
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Configurar Airbyte">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#source-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source MySQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destination-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Destination PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-validar-raw-despues-de-airbyte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Validar RAW después de Airbyte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-levantar-dbt-con-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Levantar dbt con Docker
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-ejecutar-dbt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Ejecutar dbt
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-validacion-final-de-marts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Validación final de marts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-orden-recomendado-para-levantar-todo-despues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Orden recomendado para levantar todo después
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-comandos-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Comandos útiles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-estado-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Estado final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-explicacion-para-presentacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Explicación para presentación
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Producto U3
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Producto U3
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trazabilidad_u3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trazabilidad U3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gobierno_hallazgos_u3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gobierno y hallazgos U3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../informe_final_u3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Informe final U3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../evidencias_u3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evidencias U3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repositorio
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Repositorio
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/EliasDemo/rico-bi" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/EliasDemo/rico-bi/tree/main/powerbi" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Power BI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-estructura-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Estructura del proyecto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Requisitos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-levantar-mysql-oltp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Levantar MySQL OLTP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-validar-oltp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Validar OLTP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-crear-y-validar-dw-manual-en-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Crear y validar DW manual en MySQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-levantar-postgresql-dw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Levantar PostgreSQL DW
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-crear-tablas-raw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Crear tablas RAW
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-levantar-airbyte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Levantar Airbyte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-configurar-airbyte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Configurar Airbyte
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Configurar Airbyte">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#source-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source MySQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destination-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Destination PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-validar-raw-despues-de-airbyte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Validar RAW después de Airbyte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-levantar-dbt-con-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Levantar dbt con Docker
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-ejecutar-dbt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Ejecutar dbt
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-validacion-final-de-marts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Validación final de marts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-orden-recomendado-para-levantar-todo-despues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Orden recomendado para levantar todo después
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-comandos-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Comandos útiles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-estado-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17. Estado final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-explicacion-para-presentacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18. Explicación para presentación
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="proyecto-bi-corporacion-rico-sac">Proyecto BI - Corporación Rico S.A.C.<a class="headerlink" href="#proyecto-bi-corporacion-rico-sac" title="Permanent link">&para;</a></h1>
 <p>Manual de usuario y guía para levantar el proyecto completo.</p>
 <h2 id="1-objetivo">1. Objetivo<a class="headerlink" href="#1-objetivo" title="Permanent link">&para;</a></h2>
 <p>Este proyecto implementa un flujo de Business Intelligence basado en Docker, siguiendo la lógica del repositorio guía del curso:</p>
-<pre><code class="language-text">MySQL OLTP -&gt; Airbyte -&gt; PostgreSQL RAW -&gt; dbt STAGING -&gt; dbt MARTS
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>MySQL OLTP -&gt; Airbyte -&gt; PostgreSQL RAW -&gt; dbt STAGING -&gt; dbt MARTS
+</code></pre></div>
 <p>Además, se dejó una versión manual del Data Warehouse en MySQL para demostrar la construcción de dimensiones y hechos con SQL.</p>
 <h2 id="2-estructura-del-proyecto">2. Estructura del proyecto<a class="headerlink" href="#2-estructura-del-proyecto" title="Permanent link">&para;</a></h2>
-<pre><code class="language-text">D:\rico-bi
-├── oltp-mysql
-│   ├── docker-compose.yml
-│   ├── 01_rico_oltp_completo.sql
-│   └── 02_validar_rico_oltp.sql
-│
-├── dw-mysql
-│   ├── 03_crear_dw_rico.sql
-│   ├── 04_cargar_dimensiones.sql
-│   ├── 05_cargar_hechos.sql
-│   └── 06_validar_dw_rico.sql
-│
-├── dw-pg
-│   ├── docker-compose.yml
-│   ├── 01_init_dw_pg.sql
-│   └── 02_crear_raw_tables.sql
-│
-├── ingesta-airbyte
-│   └── configuración realizada en la interfaz web de Airbyte
-│
-└── dw-dbt
-    ├── docker-compose.yml
-    ├── Dockerfile
-    ├── requirements.txt
-    ├── profiles
-    │   └── profiles.yml
-    └── rico_bi
-        └── rico_bi
-            ├── dbt_project.yml
-            ├── models
-            │   ├── staging
-            │   └── marts
-            ├── analyses
-            │   └── validacion_marts.sql
-            └── macros
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>D:\rico-bi
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── oltp-mysql
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│   ├── docker-compose.yml
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│   ├── 01_rico_oltp_completo.sql
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│   └── 02_validar_rico_oltp.sql
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>├── dw-mysql
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│   ├── 03_crear_dw_rico.sql
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│   ├── 04_cargar_dimensiones.sql
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>│   ├── 05_cargar_hechos.sql
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>│   └── 06_validar_dw_rico.sql
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>│
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>├── dw-pg
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>│   ├── docker-compose.yml
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>│   ├── 01_init_dw_pg.sql
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>│   └── 02_crear_raw_tables.sql
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>│
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>├── ingesta-airbyte
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>│   └── configuración realizada en la interfaz web de Airbyte
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>│
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>└── dw-dbt
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    ├── docker-compose.yml
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    ├── Dockerfile
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    ├── requirements.txt
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    ├── profiles
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>    │   └── profiles.yml
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>    └── rico_bi
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>        └── rico_bi
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>            ├── dbt_project.yml
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>            ├── models
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>            │   ├── staging
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>            │   └── marts
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>            ├── analyses
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>            │   └── validacion_marts.sql
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>            └── macros
+</code></pre></div>
 <h2 id="3-requisitos">3. Requisitos<a class="headerlink" href="#3-requisitos" title="Permanent link">&para;</a></h2>
 <p>Instalar previamente:</p>
-<pre><code class="language-text">Docker Desktop
-Docker Compose
-Git
-Visual Studio Code
-abctl
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Docker Desktop
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Docker Compose
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Git
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Visual Studio Code
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>abctl
+</code></pre></div>
 <p>No es necesario instalar MySQL, PostgreSQL ni dbt directamente en Windows porque se usan mediante Docker.</p>
 <p>Verificar herramientas:</p>
-<pre><code class="language-bash">docker --version
-docker compose version
-git --version
-abctl version
-docker run hello-world
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>--version
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>version
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>git<span class="w"> </span>--version
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>abctl<span class="w"> </span>version
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>docker<span class="w"> </span>run<span class="w"> </span>hello-world
+</code></pre></div>
 <h2 id="4-levantar-mysql-oltp">4. Levantar MySQL OLTP<a class="headerlink" href="#4-levantar-mysql-oltp" title="Permanent link">&para;</a></h2>
-<pre><code class="language-bash">cd D:\rico-bi\oltp-mysql
-docker compose up -d
-docker ps
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\o</span>ltp-mysql
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>docker<span class="w"> </span>ps
+</code></pre></div>
 <p>Debe aparecer el contenedor:</p>
-<pre><code class="language-text">rico-oltp-mysql
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>rico-oltp-mysql
+</code></pre></div>
 <p>Entrar a MySQL:</p>
-<pre><code class="language-bash">docker exec -it rico-oltp-mysql mysql -uroot -proot
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>rico-oltp-mysql<span class="w"> </span>mysql<span class="w"> </span>-uroot<span class="w"> </span>-proot
+</code></pre></div>
 <p>Validar:</p>
-<pre><code class="language-sql">SHOW DATABASES;
-USE rico_oltp;
-SHOW TABLES;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">USE</span><span class="w"> </span><span class="n">rico_oltp</span><span class="p">;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">SHOW</span><span class="w"> </span><span class="n">TABLES</span><span class="p">;</span>
+</code></pre></div>
 <p>Tablas esperadas:</p>
-<pre><code class="language-text">almacenes
-clientes
-detalle_ventas
-pagos
-productos
-vendedores
-ventas
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>almacenes
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>clientes
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>detalle_ventas
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>pagos
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>productos
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>vendedores
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>ventas
+</code></pre></div>
 <p>Conteos esperados:</p>
-<pre><code class="language-text">clientes             120
-productos             33
-vendedores             5
-almacenes              2
-ventas             80674
-detalle_ventas    162858
-pagos              80674
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>clientes             120
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>productos             33
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>vendedores             5
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>almacenes              2
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>ventas             80674
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>detalle_ventas    162858
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>pagos              80674
+</code></pre></div>
 <p>Salir:</p>
-<pre><code class="language-sql">exit;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">exit</span><span class="p">;</span>
+</code></pre></div>
 <h2 id="5-validar-oltp">5. Validar OLTP<a class="headerlink" href="#5-validar-oltp" title="Permanent link">&para;</a></h2>
-<pre><code class="language-bash">cd D:\rico-bi\oltp-mysql
-docker exec -i rico-oltp-mysql mysql -uroot -proot &lt; 02_validar_rico_oltp.sql
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\o</span>ltp-mysql
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>rico-oltp-mysql<span class="w"> </span>mysql<span class="w"> </span>-uroot<span class="w"> </span>-proot<span class="w"> </span>&lt;<span class="w"> </span>02_validar_rico_oltp.sql
+</code></pre></div>
 <p>Esta validación revisa ventas sin detalle, detalles sin venta, pagos sin venta, productos inexistentes, clientes inexistentes, vendedores inexistentes, almacenes inexistentes, importes negativos y diferencias fuertes de totales.</p>
 <h2 id="6-crear-y-validar-dw-manual-en-mysql">6. Crear y validar DW manual en MySQL<a class="headerlink" href="#6-crear-y-validar-dw-manual-en-mysql" title="Permanent link">&para;</a></h2>
-<pre><code class="language-bash">cd D:\rico-bi\dw-mysql
-docker exec -i rico-oltp-mysql mysql -uroot -proot &lt; 03_crear_dw_rico.sql
-docker exec -i rico-oltp-mysql mysql -uroot -proot &lt; 04_cargar_dimensiones.sql
-docker exec -i rico-oltp-mysql mysql -uroot -proot &lt; 05_cargar_hechos.sql
-docker exec -i rico-oltp-mysql mysql -uroot -proot &lt; 06_validar_dw_rico.sql
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\d</span>w-mysql
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>rico-oltp-mysql<span class="w"> </span>mysql<span class="w"> </span>-uroot<span class="w"> </span>-proot<span class="w"> </span>&lt;<span class="w"> </span>03_crear_dw_rico.sql
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>rico-oltp-mysql<span class="w"> </span>mysql<span class="w"> </span>-uroot<span class="w"> </span>-proot<span class="w"> </span>&lt;<span class="w"> </span>04_cargar_dimensiones.sql
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>rico-oltp-mysql<span class="w"> </span>mysql<span class="w"> </span>-uroot<span class="w"> </span>-proot<span class="w"> </span>&lt;<span class="w"> </span>05_cargar_hechos.sql
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>rico-oltp-mysql<span class="w"> </span>mysql<span class="w"> </span>-uroot<span class="w"> </span>-proot<span class="w"> </span>&lt;<span class="w"> </span>06_validar_dw_rico.sql
+</code></pre></div>
 <p>Resultados esperados:</p>
-<pre><code class="language-text">DTIEMPO       859
-DCLIENTE      120
-DPRODUCTO      33
-DVENDEDOR       5
-DALMACEN        2
-HVENTA      162858
-HPAGO        80674
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>DTIEMPO       859
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>DCLIENTE      120
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>DPRODUCTO      33
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>DVENDEDOR       5
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>DALMACEN        2
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>HVENTA      162858
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>HPAGO        80674
+</code></pre></div>
 <p>Indicadores principales:</p>
-<pre><code class="language-text">Ventas totales:          605,829,795.16
-Costos totales:          359,231,887.29
-Margen bruto total:      246,597,995.10
-Monto total pagos:       605,829,797.97
-Monto pagado:            583,672,506.05
-Saldo pendiente:          22,157,291.92
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Ventas totales:          605,829,795.16
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>Costos totales:          359,231,887.29
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>Margen bruto total:      246,597,995.10
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>Monto total pagos:       605,829,797.97
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>Monto pagado:            583,672,506.05
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>Saldo pendiente:          22,157,291.92
+</code></pre></div>
 <h2 id="7-levantar-postgresql-dw">7. Levantar PostgreSQL DW<a class="headerlink" href="#7-levantar-postgresql-dw" title="Permanent link">&para;</a></h2>
-<pre><code class="language-bash">cd D:\rico-bi\dw-pg
-docker compose up -d
-docker ps
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\d</span>w-pg
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>docker<span class="w"> </span>ps
+</code></pre></div>
 <p>Debe aparecer:</p>
-<pre><code class="language-text">rico-dw-postgres
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>rico-dw-postgres
+</code></pre></div>
 <p>Entrar:</p>
-<pre><code class="language-bash">docker exec -it rico-dw-postgres psql -U postgres -d rico_dw
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>rico-dw-postgres<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>postgres<span class="w"> </span>-d<span class="w"> </span>rico_dw
+</code></pre></div>
 <p>Validar schemas:</p>
-<pre><code class="language-sql">\dn
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="err">\</span><span class="n">dn</span>
+</code></pre></div>
 <p>Schemas esperados:</p>
-<pre><code class="language-text">raw
-staging
-marts
-public
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>raw
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>staging
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>marts
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>public
+</code></pre></div>
 <p>Salir:</p>
-<pre><code class="language-sql">\q
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="err">\</span><span class="n">q</span>
+</code></pre></div>
 <h2 id="8-crear-tablas-raw">8. Crear tablas RAW<a class="headerlink" href="#8-crear-tablas-raw" title="Permanent link">&para;</a></h2>
-<pre><code class="language-bash">cd D:\rico-bi\dw-pg
-docker exec -i rico-dw-postgres psql -U postgres -d rico_dw &lt; 02_crear_raw_tables.sql
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\d</span>w-pg
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>rico-dw-postgres<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>postgres<span class="w"> </span>-d<span class="w"> </span>rico_dw<span class="w"> </span>&lt;<span class="w"> </span>02_crear_raw_tables.sql
+</code></pre></div>
 <p>Validar:</p>
-<pre><code class="language-bash">docker exec -it rico-dw-postgres psql -U postgres -d rico_dw
-</code></pre>
-<pre><code class="language-sql">\dt raw.*
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>rico-dw-postgres<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>postgres<span class="w"> </span>-d<span class="w"> </span>rico_dw
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">raw</span><span class="p">.</span><span class="o">*</span>
+</code></pre></div>
 <p>Tablas esperadas:</p>
-<pre><code class="language-text">raw.almacenes
-raw.clientes
-raw.detalle_ventas
-raw.pagos
-raw.productos
-raw.vendedores
-raw.ventas
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>raw.almacenes
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>raw.clientes
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>raw.detalle_ventas
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>raw.pagos
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>raw.productos
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>raw.vendedores
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>raw.ventas
+</code></pre></div>
 <h2 id="9-levantar-airbyte">9. Levantar Airbyte<a class="headerlink" href="#9-levantar-airbyte" title="Permanent link">&para;</a></h2>
-<pre><code class="language-bash">cd D:\rico-bi\ingesta-airbyte
-abctl local status
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\i</span>ngesta-airbyte
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>abctl<span class="w"> </span><span class="nb">local</span><span class="w"> </span>status
+</code></pre></div>
 <p>Si no está activo:</p>
-<pre><code class="language-bash">abctl local install --port 8010
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>abctl<span class="w"> </span><span class="nb">local</span><span class="w"> </span>install<span class="w"> </span>--port<span class="w"> </span><span class="m">8010</span>
+</code></pre></div>
 <p>Obtener credenciales:</p>
-<pre><code class="language-bash">abctl local credentials
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>abctl<span class="w"> </span><span class="nb">local</span><span class="w"> </span>credentials
+</code></pre></div>
 <p>Abrir en navegador:</p>
-<pre><code class="language-text">http://localhost:8010
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>http://localhost:8010
+</code></pre></div>
 <h2 id="10-configurar-airbyte">10. Configurar Airbyte<a class="headerlink" href="#10-configurar-airbyte" title="Permanent link">&para;</a></h2>
 <h3 id="source-mysql">Source MySQL<a class="headerlink" href="#source-mysql" title="Permanent link">&para;</a></h3>
-<pre><code class="language-text">Tipo: MySQL
-Name: rico_oltp_mysql
-Host: host.docker.internal
-Port: 13306
-Database: rico_oltp
-Username: root
-Password: root
-Encryption: preferred
-SSH Tunnel Method: No Tunnel
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>Tipo: MySQL
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>Name: rico_oltp_mysql
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>Host: host.docker.internal
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>Port: 13306
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>Database: rico_oltp
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>Username: root
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>Password: root
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a>Encryption: preferred
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a>SSH Tunnel Method: No Tunnel
+</code></pre></div>
 <h3 id="destination-postgresql">Destination PostgreSQL<a class="headerlink" href="#destination-postgresql" title="Permanent link">&para;</a></h3>
-<pre><code class="language-text">Tipo: Postgres
-Name: rico_dw_postgres_raw
-Host: host.docker.internal
-Port: 15432
-Database: rico_dw
-Default Schema: raw
-Username: postgres
-Password: postgres
-SSL: disable
-SSH Tunnel Method: No Tunnel
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Tipo: Postgres
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>Name: rico_dw_postgres_raw
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>Host: host.docker.internal
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>Port: 15432
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>Database: rico_dw
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>Default Schema: raw
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>Username: postgres
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a>Password: postgres
+<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a>SSL: disable
+<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a>SSH Tunnel Method: No Tunnel
+</code></pre></div>
 <p>Streams seleccionados:</p>
-<pre><code class="language-text">almacenes
-clientes
-detalle_ventas
-pagos
-productos
-vendedores
-ventas
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>almacenes
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>clientes
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>detalle_ventas
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>pagos
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>productos
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>vendedores
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>ventas
+</code></pre></div>
 <p>Modo:</p>
-<pre><code class="language-text">Full refresh | Overwrite
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Full refresh | Overwrite
+</code></pre></div>
 <p>Frecuencia:</p>
-<pre><code class="language-text">Every 24 hours
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>Every 24 hours
+</code></pre></div>
 <p>Ejecutar:</p>
-<pre><code class="language-text">Finish &amp; Sync
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>Finish &amp; Sync
+</code></pre></div>
 <h2 id="11-validar-raw-despues-de-airbyte">11. Validar RAW después de Airbyte<a class="headerlink" href="#11-validar-raw-despues-de-airbyte" title="Permanent link">&para;</a></h2>
-<pre><code class="language-bash">docker exec -it rico-dw-postgres psql -U postgres -d rico_dw
-</code></pre>
-<pre><code class="language-sql">SELECT 'almacenes' AS tabla, COUNT(*) AS total FROM raw.almacenes
-UNION ALL
-SELECT 'clientes', COUNT(*) FROM raw.clientes
-UNION ALL
-SELECT 'detalle_ventas', COUNT(*) FROM raw.detalle_ventas
-UNION ALL
-SELECT 'pagos', COUNT(*) FROM raw.pagos
-UNION ALL
-SELECT 'productos', COUNT(*) FROM raw.productos
-UNION ALL
-SELECT 'vendedores', COUNT(*) FROM raw.vendedores
-UNION ALL
-SELECT 'ventas', COUNT(*) FROM raw.ventas;
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>rico-dw-postgres<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>postgres<span class="w"> </span>-d<span class="w"> </span>rico_dw
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;almacenes&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">tabla</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">raw</span><span class="p">.</span><span class="n">almacenes</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;clientes&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">raw</span><span class="p">.</span><span class="n">clientes</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;detalle_ventas&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">raw</span><span class="p">.</span><span class="n">detalle_ventas</span>
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+<a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;pagos&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">raw</span><span class="p">.</span><span class="n">pagos</span>
+<a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+<a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;productos&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">raw</span><span class="p">.</span><span class="n">productos</span>
+<a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+<a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;vendedores&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">raw</span><span class="p">.</span><span class="n">vendedores</span>
+<a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
+<a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;ventas&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">raw</span><span class="p">.</span><span class="n">ventas</span><span class="p">;</span>
+</code></pre></div>
 <p>Resultado esperado:</p>
-<pre><code class="language-text">almacenes             2
-clientes            120
-productos            33
-vendedores            5
-pagos             80674
-ventas            80674
-detalle_ventas   162858
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>almacenes             2
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>clientes            120
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>productos            33
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>vendedores            5
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>pagos             80674
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a>ventas            80674
+<a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a>detalle_ventas   162858
+</code></pre></div>
 <p>Salir:</p>
-<pre><code class="language-sql">\q
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="err">\</span><span class="n">q</span>
+</code></pre></div>
 <h2 id="12-levantar-dbt-con-docker">12. Levantar dbt con Docker<a class="headerlink" href="#12-levantar-dbt-con-docker" title="Permanent link">&para;</a></h2>
-<pre><code class="language-bash">cd D:\rico-bi\dw-dbt
-docker network create rico-bi-net
-docker network connect rico-bi-net rico-dw-postgres
-docker compose up -d --build
-docker compose ps
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\d</span>w-dbt
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>rico-bi-net
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>docker<span class="w"> </span>network<span class="w"> </span>connect<span class="w"> </span>rico-bi-net<span class="w"> </span>rico-dw-postgres
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--build
+<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a>docker<span class="w"> </span>compose<span class="w"> </span>ps
+</code></pre></div>
 <p>Debe aparecer:</p>
-<pre><code class="language-text">rico-dw-dbt
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>rico-dw-dbt
+</code></pre></div>
 <p>Entrar:</p>
-<pre><code class="language-bash">docker exec -it rico-dw-dbt bash
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>rico-dw-dbt<span class="w"> </span>bash
+</code></pre></div>
 <p>Validar:</p>
-<pre><code class="language-bash">dbt --version
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>dbt<span class="w"> </span>--version
+</code></pre></div>
 <h2 id="13-ejecutar-dbt">13. Ejecutar dbt<a class="headerlink" href="#13-ejecutar-dbt" title="Permanent link">&para;</a></h2>
 <p>Dentro del contenedor:</p>
-<pre><code class="language-bash">cd /usr/app/rico_bi/rico_bi
-dbt debug
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="nb">cd</span><span class="w"> </span>/usr/app/rico_bi/rico_bi
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>dbt<span class="w"> </span>debug
+</code></pre></div>
 <p>Resultado esperado:</p>
-<pre><code class="language-text">All checks passed!
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>All checks passed!
+</code></pre></div>
 <p>Ejecutar staging:</p>
-<pre><code class="language-bash">dbt run --select staging
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>staging
+</code></pre></div>
 <p>Resultado esperado:</p>
-<pre><code class="language-text">PASS=7 ERROR=0
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>PASS=7 ERROR=0
+</code></pre></div>
 <p>Ejecutar marts:</p>
-<pre><code class="language-bash">dbt run --select marts
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>marts
+</code></pre></div>
 <p>Resultado esperado:</p>
-<pre><code class="language-text">PASS=7 ERROR=0
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>PASS=7 ERROR=0
+</code></pre></div>
 <p>Ejecutar pruebas:</p>
-<pre><code class="language-bash">dbt test
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>dbt<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
 <p>Resultado esperado:</p>
-<pre><code class="language-text">PASS=40 WARN=0 ERROR=0 SKIP=0 TOTAL=40
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>PASS=40 WARN=0 ERROR=0 SKIP=0 TOTAL=40
+</code></pre></div>
 <h2 id="14-validacion-final-de-marts">14. Validación final de marts<a class="headerlink" href="#14-validacion-final-de-marts" title="Permanent link">&para;</a></h2>
 <p>Dentro del contenedor dbt:</p>
-<pre><code class="language-bash">dbt compile --select validacion_marts
-exit
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>dbt<span class="w"> </span>compile<span class="w"> </span>--select<span class="w"> </span>validacion_marts
+<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a><span class="nb">exit</span>
+</code></pre></div>
 <p>Desde Windows CMD:</p>
-<pre><code class="language-bash">cd D:\rico-bi\dw-dbt\rico_bi\rico_bi
-docker exec -i rico-dw-postgres psql -U postgres -d rico_dw &lt; target\compiled\rico_bi\analyses\validacion_marts.sql
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\d</span>w-dbt<span class="se">\r</span>ico_bi<span class="se">\r</span>ico_bi
+<a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>rico-dw-postgres<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>postgres<span class="w"> </span>-d<span class="w"> </span>rico_dw<span class="w"> </span>&lt;<span class="w"> </span>target<span class="se">\c</span>ompiled<span class="se">\r</span>ico_bi<span class="se">\a</span>nalyses<span class="se">\v</span>alidacion_marts.sql
+</code></pre></div>
 <p>Resultados esperados:</p>
-<pre><code class="language-text">dim_cliente       120
-dim_almacen         2
-dim_producto       33
-dim_vendedor        5
-dim_tiempo        859
-fact_pagos      80674
-fact_ventas    162858
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>dim_cliente       120
+<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>dim_almacen         2
+<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a>dim_producto       33
+<a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>dim_vendedor        5
+<a id="__codelineno-53-5" name="__codelineno-53-5" href="#__codelineno-53-5"></a>dim_tiempo        859
+<a id="__codelineno-53-6" name="__codelineno-53-6" href="#__codelineno-53-6"></a>fact_pagos      80674
+<a id="__codelineno-53-7" name="__codelineno-53-7" href="#__codelineno-53-7"></a>fact_ventas    162858
+</code></pre></div>
 <p>Ventas:</p>
-<pre><code class="language-text">ventas_raw      605,829,795.16
-ventas_marts    605,829,795.16
-diferencia                0.00
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>ventas_raw      605,829,795.16
+<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>ventas_marts    605,829,795.16
+<a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>diferencia                0.00
+</code></pre></div>
 <p>Pagos:</p>
-<pre><code class="language-text">pagos_raw       605,829,797.97
-pagos_marts     605,829,797.97
-diferencia                0.00
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>pagos_raw       605,829,797.97
+<a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>pagos_marts     605,829,797.97
+<a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a>diferencia                0.00
+</code></pre></div>
 <p>Indicadores principales:</p>
-<pre><code class="language-text">Ventas totales:          605,829,795.16
-Costos totales:          359,231,887.29
-Margen bruto total:      246,597,995.10
-Margen global:                    40.70 %
-Monto total pagos:       605,829,797.97
-Monto pagado:            583,672,506.05
-Saldo pendiente:          22,157,291.92
-Porcentaje cobrado:               96.34 %
-Porcentaje pendiente:              3.66 %
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>Ventas totales:          605,829,795.16
+<a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a>Costos totales:          359,231,887.29
+<a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a>Margen bruto total:      246,597,995.10
+<a id="__codelineno-56-4" name="__codelineno-56-4" href="#__codelineno-56-4"></a>Margen global:                    40.70 %
+<a id="__codelineno-56-5" name="__codelineno-56-5" href="#__codelineno-56-5"></a>Monto total pagos:       605,829,797.97
+<a id="__codelineno-56-6" name="__codelineno-56-6" href="#__codelineno-56-6"></a>Monto pagado:            583,672,506.05
+<a id="__codelineno-56-7" name="__codelineno-56-7" href="#__codelineno-56-7"></a>Saldo pendiente:          22,157,291.92
+<a id="__codelineno-56-8" name="__codelineno-56-8" href="#__codelineno-56-8"></a>Porcentaje cobrado:               96.34 %
+<a id="__codelineno-56-9" name="__codelineno-56-9" href="#__codelineno-56-9"></a>Porcentaje pendiente:              3.66 %
+</code></pre></div>
 <h2 id="15-orden-recomendado-para-levantar-todo-despues">15. Orden recomendado para levantar todo después<a class="headerlink" href="#15-orden-recomendado-para-levantar-todo-despues" title="Permanent link">&para;</a></h2>
 <p>Cuando se quiera abrir el proyecto nuevamente:</p>
-<pre><code class="language-bash">cd D:\rico-bi\oltp-mysql
-docker compose up -d
-</code></pre>
-<pre><code class="language-bash">cd D:\rico-bi\dw-pg
-docker compose up -d
-</code></pre>
-<pre><code class="language-bash">cd D:\rico-bi\dw-dbt
-docker compose up -d
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\o</span>ltp-mysql
+<a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\d</span>w-pg
+<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\d</span>w-dbt
+<a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
 <p>Verificar:</p>
-<pre><code class="language-bash">docker ps
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>docker<span class="w"> </span>ps
+</code></pre></div>
 <p>Revisar Airbyte:</p>
-<pre><code class="language-bash">abctl local status
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>abctl<span class="w"> </span><span class="nb">local</span><span class="w"> </span>status
+</code></pre></div>
 <p>Abrir:</p>
-<pre><code class="language-text">http://localhost:8010
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>http://localhost:8010
+</code></pre></div>
 <p>Entrar a dbt:</p>
-<pre><code class="language-bash">docker exec -it rico-dw-dbt bash
-cd /usr/app/rico_bi/rico_bi
-dbt debug
-dbt run --select staging
-dbt run --select marts
-dbt test
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>rico-dw-dbt<span class="w"> </span>bash
+<a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a><span class="nb">cd</span><span class="w"> </span>/usr/app/rico_bi/rico_bi
+<a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a>dbt<span class="w"> </span>debug
+<a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a>dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>staging
+<a id="__codelineno-63-5" name="__codelineno-63-5" href="#__codelineno-63-5"></a>dbt<span class="w"> </span>run<span class="w"> </span>--select<span class="w"> </span>marts
+<a id="__codelineno-63-6" name="__codelineno-63-6" href="#__codelineno-63-6"></a>dbt<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
 <h2 id="16-comandos-utiles">16. Comandos útiles<a class="headerlink" href="#16-comandos-utiles" title="Permanent link">&para;</a></h2>
 <p>Ver contenedores:</p>
-<pre><code class="language-bash">docker ps
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>docker<span class="w"> </span>ps
+</code></pre></div>
 <p>Entrar a MySQL:</p>
-<pre><code class="language-bash">docker exec -it rico-oltp-mysql mysql -uroot -proot
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>rico-oltp-mysql<span class="w"> </span>mysql<span class="w"> </span>-uroot<span class="w"> </span>-proot
+</code></pre></div>
 <p>Entrar a PostgreSQL:</p>
-<pre><code class="language-bash">docker exec -it rico-dw-postgres psql -U postgres -d rico_dw
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>rico-dw-postgres<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>postgres<span class="w"> </span>-d<span class="w"> </span>rico_dw
+</code></pre></div>
 <p>Entrar a dbt:</p>
-<pre><code class="language-bash">docker exec -it rico-dw-dbt bash
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>rico-dw-dbt<span class="w"> </span>bash
+</code></pre></div>
 <p>Apagar MySQL:</p>
-<pre><code class="language-bash">cd D:\rico-bi\oltp-mysql
-docker compose down
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\o</span>ltp-mysql
+<a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+</code></pre></div>
 <p>Apagar PostgreSQL:</p>
-<pre><code class="language-bash">cd D:\rico-bi\dw-pg
-docker compose down
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\d</span>w-pg
+<a id="__codelineno-69-2" name="__codelineno-69-2" href="#__codelineno-69-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+</code></pre></div>
 <p>Apagar dbt:</p>
-<pre><code class="language-bash">cd D:\rico-bi\dw-dbt
-docker compose down
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\d</span>w-dbt
+<a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+</code></pre></div>
 <p>Reiniciar MySQL borrando volumen:</p>
-<pre><code class="language-bash">cd D:\rico-bi\oltp-mysql
-docker compose down -v
-docker compose up -d
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\o</span>ltp-mysql
+<a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v
+<a id="__codelineno-71-3" name="__codelineno-71-3" href="#__codelineno-71-3"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
 <p>Reiniciar PostgreSQL borrando volumen:</p>
-<pre><code class="language-bash">cd D:\rico-bi\dw-pg
-docker compose down -v
-docker compose up -d
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="nb">cd</span><span class="w"> </span>D:<span class="se">\r</span>ico-bi<span class="se">\d</span>w-pg
+<a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v
+<a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
 <p>Credenciales Airbyte:</p>
-<pre><code class="language-bash">abctl local credentials
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a>abctl<span class="w"> </span><span class="nb">local</span><span class="w"> </span>credentials
+</code></pre></div>
 <h2 id="17-estado-final">17. Estado final<a class="headerlink" href="#17-estado-final" title="Permanent link">&para;</a></h2>
-<pre><code class="language-text">oltp-mysql        completado
-dw-mysql          completado como versión manual
-dw-pg             completado
-ingesta-airbyte   completado
-dw-dbt            completado
-validaciones      completadas
-powerbi           pendiente para etapa posterior
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a>oltp-mysql        completado
+<a id="__codelineno-74-2" name="__codelineno-74-2" href="#__codelineno-74-2"></a>dw-mysql          completado como versión manual
+<a id="__codelineno-74-3" name="__codelineno-74-3" href="#__codelineno-74-3"></a>dw-pg             completado
+<a id="__codelineno-74-4" name="__codelineno-74-4" href="#__codelineno-74-4"></a>ingesta-airbyte   completado
+<a id="__codelineno-74-5" name="__codelineno-74-5" href="#__codelineno-74-5"></a>dw-dbt            completado
+<a id="__codelineno-74-6" name="__codelineno-74-6" href="#__codelineno-74-6"></a>validaciones      completadas
+<a id="__codelineno-74-7" name="__codelineno-74-7" href="#__codelineno-74-7"></a>powerbi           pendiente para etapa posterior
+</code></pre></div>
 <h2 id="18-explicacion-para-presentacion">18. Explicación para presentación<a class="headerlink" href="#18-explicacion-para-presentacion" title="Permanent link">&para;</a></h2>
 <p>El proyecto implementa una arquitectura BI basada en contenedores Docker. Primero se levanta una base transaccional MySQL llamada <code>rico_oltp</code>. Luego se valida su calidad. Después, mediante Airbyte, se realiza la ingesta hacia PostgreSQL en el esquema <code>raw</code>. Posteriormente, dbt transforma los datos hacia <code>staging</code> y finalmente construye el modelo analítico en <code>marts</code>, compuesto por dimensiones y tablas de hechos. El flujo fue validado con pruebas dbt y consultas de métricas, obteniendo diferencias de <code>0.00</code> entre la capa <code>raw</code> y la capa <code>marts</code>.</p>
-              
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
             </div>
-          </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href=".." class="btn btn-neutral float-left" title="Inicio"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../trazabilidad_u3/" class="btn btn-neutral float-right" title="Trazabilidad U3">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
-  </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
           
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    
-    
-      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../trazabilidad_u3/" style="color: #fcfcfc">Next &raquo;</a></span>
-    
-  </span>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
 </div>
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "..";</script>
-    <script src="../js/theme_extra.js"></script>
-    <script src="../js/theme.js"></script>
-      <script src="../search/main.js"></script>
-    <script>
-        jQuery(function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        });
-    </script>
-
-</body>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
 </html>
