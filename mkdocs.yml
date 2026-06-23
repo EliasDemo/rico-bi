@@ -9,6 +9,7 @@ theme:
 nav:
   - Inicio: index.md
   - Guía de ejecución: guia_ejecucion.md
+  - Trazabilidad U3: trazabilidad_u3.md
 
 markdown_extensions:
   - toc:
