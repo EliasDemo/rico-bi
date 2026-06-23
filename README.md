@@ -5,6 +5,14 @@
 
 **Ventas · Rentabilidad · Clientes · Vendedores · Cobranza**
 
+
+## 🔗 Enlaces del producto
+
+| Recurso | Enlace |
+|---|---|
+| Repositorio GitHub | https://github.com/EliasDemo/rico-bi |
+| Documentación MkDocs | https://EliasDemo.github.io/rico-bi/ |
+| Dashboard Power BI | `powerbi/rico_pollo_actualizado.pbix` |
 <br>
 
 ![Estado](https://img.shields.io/badge/Estado-U3%20en%20desarrollo-ffb000?style=for-the-badge)
