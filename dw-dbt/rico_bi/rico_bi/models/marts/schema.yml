@@ -1,0 +1,462 @@
+version: 2
+
+models:
+  - name: dim_cliente
+    description: "Dimensión de clientes de Corporación Rico S.A.C."
+    columns:
+      - name: cliente_key
+        description: "Clave del cliente para el modelo analítico."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: razon_social
+        description: "Nombre o razón social del cliente."
+        data_tests:
+          - not_null
+
+      - name: tipo_cliente
+        description: "Tipo de cliente, por ejemplo mayorista o minorista."
+
+      - name: ciudad
+        description: "Ciudad del cliente."
+
+      - name: departamento
+        description: "Departamento del cliente."
+
+      - name: activo
+        description: "Indica si el cliente está activo."
+
+  - name: dim_producto
+    description: "Dimensión de productos comercializados."
+    columns:
+      - name: producto_key
+        description: "Clave del producto para el modelo analítico."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: nombre_producto
+        description: "Nombre comercial del producto."
+        data_tests:
+          - not_null
+
+      - name: categoria
+        description: "Categoría principal del producto."
+
+      - name: subcategoria
+        description: "Subcategoría del producto."
+
+      - name: unidad_medida
+        description: "Unidad de medida del producto."
+
+      - name: precio_base
+        description: "Precio base del producto."
+
+      - name: precio_compra
+        description: "Precio de compra o costo base del producto."
+
+      - name: precio_venta_min
+        description: "Precio mínimo de venta."
+
+      - name: stock_actual
+        description: "Stock actual registrado."
+
+      - name: stock_minimo
+        description: "Stock mínimo esperado."
+
+      - name: activo
+        description: "Indica si el producto está activo."
+
+  - name: dim_vendedor
+    description: "Dimensión de vendedores."
+    columns:
+      - name: vendedor_key
+        description: "Clave del vendedor para el modelo analítico."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: nombre_vendedor
+        description: "Nombre del vendedor."
+        data_tests:
+          - not_null
+
+      - name: zona
+        description: "Zona comercial asignada al vendedor."
+
+      - name: cargo
+        description: "Cargo del vendedor."
+
+      - name: activo
+        description: "Indica si el vendedor está activo."
+
+  - name: dim_almacen
+    description: "Dimensión de almacenes."
+    columns:
+      - name: almacen_key
+        description: "Clave del almacén para el modelo analítico."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: nombre_almacen
+        description: "Nombre del almacén."
+        data_tests:
+          - not_null
+
+      - name: ciudad
+        description: "Ciudad del almacén."
+
+      - name: departamento
+        description: "Departamento del almacén."
+
+      - name: tipo_almacen
+        description: "Tipo de almacén."
+
+      - name: responsable
+        description: "Responsable del almacén."
+
+  - name: dim_tiempo
+    description: "Dimensión calendario continua para análisis temporal en Power BI."
+    columns:
+      - name: tiempo_key
+        description: "Clave de fecha en formato YYYYMMDD."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: fecha
+        description: "Fecha calendario."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: anio
+        description: "Año calendario."
+        data_tests:
+          - not_null
+
+      - name: trimestre
+        description: "Número de trimestre."
+
+      - name: nombre_trimestre
+        description: "Nombre del trimestre."
+
+      - name: mes
+        description: "Número de mes."
+        data_tests:
+          - not_null
+
+      - name: nombre_mes
+        description: "Nombre del mes."
+
+      - name: anio_mes
+        description: "Año y mes en formato YYYY-MM."
+
+      - name: anio_mes_numero
+        description: "Año y mes en formato numérico YYYYMM para ordenamiento."
+        data_tests:
+          - not_null
+
+      - name: mes_anio
+        description: "Mes y año en texto para visualización."
+
+      - name: dia
+        description: "Día del mes."
+
+      - name: dia_anio
+        description: "Día del año."
+
+      - name: dia_semana_numero
+        description: "Número de día de semana ISO."
+
+      - name: nombre_dia_semana
+        description: "Nombre del día de semana."
+
+      - name: semana_anio
+        description: "Número de semana del año."
+
+      - name: es_fin_semana
+        description: "Indica si la fecha corresponde a sábado o domingo."
+
+  - name: fact_ventas
+    description: "Tabla de hechos de ventas a nivel de detalle de venta."
+    columns:
+      - name: venta_detalle_key
+        description: "Clave única del detalle de venta."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: tiempo_key
+        description: "Clave de fecha de venta."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_tiempo')
+                field: tiempo_key
+
+      - name: cliente_key
+        description: "Clave del cliente."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_cliente')
+                field: cliente_key
+
+      - name: producto_key
+        description: "Clave del producto."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_producto')
+                field: producto_key
+
+      - name: vendedor_key
+        description: "Clave del vendedor."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_vendedor')
+                field: vendedor_key
+
+      - name: almacen_key
+        description: "Clave del almacén."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_almacen')
+                field: almacen_key
+
+      - name: venta_id
+        description: "Identificador de la venta."
+
+      - name: detalle_id
+        description: "Identificador del detalle de venta."
+
+      - name: fecha_venta
+        description: "Fecha de la venta."
+
+      - name: unidades
+        description: "Cantidad vendida en unidades."
+
+      - name: kilos
+        description: "Cantidad vendida en kilos."
+
+      - name: subtotal
+        description: "Venta neta sin IGV."
+        data_tests:
+          - not_null
+
+      - name: total_linea
+        description: "Venta facturada con IGV."
+        data_tests:
+          - not_null
+
+      - name: venta_neta_sin_igv
+        description: "Métrica de venta neta sin IGV para rentabilidad."
+        data_tests:
+          - not_null
+
+      - name: venta_facturada_con_igv
+        description: "Métrica de venta facturada con IGV para facturación."
+        data_tests:
+          - not_null
+
+      - name: costo_total
+        description: "Costo total calculado de la línea de venta."
+        data_tests:
+          - not_null
+
+      - name: margen_bruto
+        description: "Margen bruto correcto: venta neta sin IGV menos costo total."
+        data_tests:
+          - not_null
+
+      - name: porcentaje_margen
+        description: "Porcentaje de margen bruto sobre venta neta sin IGV."
+
+      - name: margen_bruto_con_igv
+        description: "Margen referencial usando venta con IGV. No debe usarse como KPI principal."
+
+      - name: porcentaje_margen_con_igv
+        description: "Porcentaje de margen referencial usando venta con IGV."
+
+      - name: venta_count
+        description: "Contador técnico de líneas de venta."
+
+  - name: fact_pagos
+    description: "Tabla de hechos de pagos y cobranza."
+    columns:
+      - name: pago_key
+        description: "Clave única del pago."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: tiempo_key
+        description: "Clave de fecha principal. Se conserva para compatibilidad y representa fecha de emisión."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_tiempo')
+                field: tiempo_key
+
+      - name: tiempo_venta_key
+        description: "Clave de fecha de venta."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_tiempo')
+                field: tiempo_key
+
+      - name: tiempo_emision_key
+        description: "Clave de fecha de emisión."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_tiempo')
+                field: tiempo_key
+
+      - name: tiempo_vencimiento_key
+        description: "Clave de fecha de vencimiento."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_tiempo')
+                field: tiempo_key
+
+      - name: tiempo_pago_key
+        description: "Clave de fecha de pago. Puede ser nula si el pago sigue pendiente."
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_tiempo')
+                field: tiempo_key
+
+      - name: cliente_key
+        description: "Clave del cliente."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_cliente')
+                field: cliente_key
+
+      - name: vendedor_key
+        description: "Clave del vendedor."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_vendedor')
+                field: vendedor_key
+
+      - name: almacen_key
+        description: "Clave del almacén."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_almacen')
+                field: almacen_key
+
+      - name: pago_id
+        description: "Identificador del pago."
+
+      - name: venta_id
+        description: "Identificador de la venta asociada."
+
+      - name: estado_pago
+        description: "Estado del pago, por ejemplo Pagado o En mora."
+
+      - name: tipo_pago
+        description: "Tipo de pago de la operación."
+
+      - name: fecha_venta
+        description: "Fecha de venta asociada al pago."
+
+      - name: fecha_emision
+        description: "Fecha de emisión del documento."
+
+      - name: fecha_vencimiento
+        description: "Fecha de vencimiento del pago."
+
+      - name: fecha_pago
+        description: "Fecha real de pago. Puede ser nula si está pendiente."
+
+      - name: plazo_dias
+        description: "Plazo de crédito pactado en días."
+
+      - name: monto_total
+        description: "Monto total del documento."
+        data_tests:
+          - not_null
+
+      - name: monto_pagado
+        description: "Monto pagado."
+        data_tests:
+          - not_null
+
+      - name: saldo_pendiente
+        description: "Saldo pendiente de cobro."
+        data_tests:
+          - not_null
+
+      - name: dias_mora
+        description: "Días de mora registrados."
+
+      - name: dias_cobro
+        description: "Días reales entre emisión y pago. Base para DSO."
+
+      - name: dias_credito_programado
+        description: "Días entre emisión y vencimiento."
+
+      - name: dias_atraso
+        description: "Días de atraso calculados."
+
+      - name: es_credito
+        description: "Indica si la operación fue al crédito."
+
+      - name: es_pagado
+        description: "Indica si el documento fue pagado."
+
+      - name: es_en_mora
+        description: "Indica si el documento está en mora."
+
+      - name: es_pendiente
+        description: "Indica si el documento tiene saldo pendiente."
+
+      - name: es_pago_a_tiempo
+        description: "Indica si el pago fue realizado a tiempo."
+
+      - name: es_pago_tarde
+        description: "Indica si el pago fue realizado después del vencimiento."
+
+      - name: monto_credito
+        description: "Monto correspondiente a operaciones al crédito."
+        data_tests:
+          - not_null
+
+      - name: monto_contado
+        description: "Monto correspondiente a operaciones al contado."
+        data_tests:
+          - not_null
+
+      - name: monto_vencido
+        description: "Monto vencido pendiente de cobro."
+        data_tests:
+          - not_null
+
+      - name: pago_count
+        description: "Contador técnico de pagos."

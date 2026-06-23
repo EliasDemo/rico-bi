@@ -1,0 +1,14 @@
+services:
+  rico-dw-dbt:
+    build: .
+    container_name: rico-dw-dbt
+    restart: unless-stopped
+    volumes:
+      - ./rico_bi:/usr/app/rico_bi
+      - ./profiles:/root/.dbt
+    networks:
+      - rico-bi-net
+
+networks:
+  rico-bi-net:
+    external: true

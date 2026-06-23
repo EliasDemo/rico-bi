@@ -1,0 +1,17 @@
+services:
+  rico-dw-postgres:
+    image: postgres:16
+    container_name: rico-dw-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: rico_dw
+    ports:
+      - "15432:5432"
+    volumes:
+      - rico_dw_pg_data:/var/lib/postgresql/data
+      - ./01_init_dw_pg.sql:/docker-entrypoint-initdb.d/01_init_dw_pg.sql
+
+volumes:
+  rico_dw_pg_data:

@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: raw
+    database: rico_dw
+    schema: raw
+    tables:
+      - name: clientes
+      - name: productos
+      - name: vendedores
+      - name: almacenes
+      - name: ventas
+      - name: detalle_ventas
+      - name: pagos

@@ -1,0 +1,16 @@
+services:
+  rico-oltp-mysql:
+    image: mysql:8.4
+    container_name: rico-oltp-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: rico_oltp
+    ports:
+      - "13306:3306"
+    volumes:
+      - rico_oltp_data:/var/lib/mysql
+      - ./01_rico_oltp_completo.sql:/docker-entrypoint-initdb.d/01_rico_oltp_completo.sql
+
+volumes:
+  rico_oltp_data:

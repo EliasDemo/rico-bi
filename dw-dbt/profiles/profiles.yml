@@ -1,0 +1,12 @@
+rico_bi:
+  outputs:
+    dev:
+      dbname: rico_dw
+      host: rico-dw-postgres
+      pass: postgres
+      port: 5432
+      schema: staging
+      threads: 4
+      type: postgres
+      user: postgres
+  target: dev

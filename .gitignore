@@ -1,0 +1,38 @@
+# dbt
+**/target/
+**/dbt_packages/
+**/logs/
+*.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Airbyte local
+.abctl/
+airbyte/
+
+# Archivos temporales
+*.tmp
+*.bak
+
+# Usuario dbt local
+**/.user.yml
+
+# MkDocs
+site/
+
+# MkDocs
+site/
+
+# Backups locales
+**/backups/
